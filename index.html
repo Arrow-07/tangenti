@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RETTE TANGENTI A UNA PARABOLA</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function reloadPage() {
+            location.reload();
+        }
+        
+        function parabola(a, b, c) {
+            var eq = a + "x^2 " + b + "x " + c;
+            if (b == 0 && c != 0)
+                eq = a + "x^2 " + c;
+            else if (c == 0 && b != 0)
+                eq = a + "x^2 " + b + "x ";
+            else if (c == 0 && b == 0)
+                eq = a + "x^2 ";
+
+            return (eq);
+        }
+
+        function retta(x, y) {
+            var eq1 = "xm " + -x + "m " + y;
+            if (x == 0 && y != 0)
+                eq1 = "xm " + y;
+            else if (y == 0 && x != 0)
+                eq1 = "xm " + -x + "m";
+            else if (y == 0 && x == 0)
+                eq1 = "xm ";
+
+            return (eq1);
+        }
+
+        function risolvi() {
+            var eqz = A + "X^2 " + "x( -m ";
+            if (B != 0) {
+                eqz = eqz + B + " ) "
+            } else {
+                eqz = eqz + ") "
+            }
+            if (xp != 0) {
+                eqz = eqz + (xp) + "m "
+            }
+
+            if ((-(yp) + C) != 0) {
+                eqz = eqz + (-(yp) + C);
+            }
+
+            return (eqz);
+        }
+
+        function calcoladelta() {
+            /*         Δ=b^2-4ac        -1X^2 x( -m +4 )-1                  -4(A)*(xp/*/
+            var delta
+
+            delta = "m^2 " + ((-2 * B) + (-4 * A * xp)) + "m " + (-4 * A * (-(yp) + C) + B * B);
+
+            return (delta);
+        }
+
+        function trovam12(c, b) {//m = trovam12(((-4*A*(-(yp)+ C)) + B*B ), -2*B);
+            var a = 1;
+            delta = b * b - 4 * a * c
+            if (delta > 0)                         // due soluzioni distinte
+            {
+                delta = Math.sqrt(delta)
+                x1 = (-b - delta) / (2 * a)
+                x2 = (-b + delta) / (2 * a)
+
+                return ("m1 = " + x1 + " m2 = " + x2);
+            }
+            else if (delta == 0)                   // due soluzioni coincidenti
+            {
+                x = -b / (2 * a)
+                return ("m1 = m2 = " + x)
+            }
+            else                                   // nessuna soluzione
+            {
+                return ("Non ammette soluzioni reali")
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="textbox-container">
+            <label for="textbox1">SISTEMA:</label>
+            <input type="text" id="textbox1" class="textbox"  readonly>
+        </div>
+        <div class="textbox-container">
+            <label for="textbox2">EQUAZIONE RISOLVENTE:</label>
+            <input type="text" id="textbox2" class="textbox"  readonly>
+        </div>
+        <div class="textbox-container">
+            <label for="textbox3">DELTA:</label>
+            <input type="text" id="textbox3" class="textbox"  readonly>
+        </div>
+        <div class="textbox-container">
+            <label for="textbox4">SULUZIONI:</label>
+            <input type="text" id="textbox4" class="textbox" readonly>
+        </div>
+        <button  class="button"onclick="reloadPage()">RICARICA LA PAGINA</button>
+    </div>
+
+    <script>
+        var A, B, C, xp, yp;
+        var eq_parabola, eq_retta, eq_risolvente;
+
+
+        //----------------------------------------//
+        do {
+            A = parseInt(prompt("inserire A!=0:     "));
+        } while (A == 0)
+        B = parseInt(prompt("inserire B:     "));
+        C = parseInt(prompt("inserire C:     "));
+
+        eq_parabola = parabola(A, B, C);
+        //-----------------------------------------------//
+        xp = parseInt(prompt("inserire XP:     "));
+        yp = parseInt(prompt("inserire YP:     "));
+
+        eq_retta = retta(xp, yp);//<-----------
+        //-------------------------------------------------//
+        textbox1.value = /*"SISTEMA: " + */eq_retta + " = " + eq_parabola;
+
+        eq_risolvente = risolvi()
+
+        textbox2.value= /*"EQUAZIONE RISOLVENTE: " + */eq_risolvente;
+
+        delta = calcoladelta();
+
+        textbox3.value= /*"DELTA: " + */delta;
+
+        m = trovam12(((-4 * A * (-(yp) + C)) + B * B), ((-2 * B) + (-4 * A * xp)));
+
+        textbox4.value= /*"SOLUZIONI: " + */m;
+    </script>
+</body>
+</html>
+`
